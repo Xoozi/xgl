@@ -3,12 +3,15 @@
 
 #define T fb_env_t
 
+typedef unsigned char byte;
+
 typedef struct T *T;
+
 
 /**
  * initialize work and clear up
  */
-extern T        fb_env_init(char *fb_name);
+extern T        fb_env_init(const char *fbname);
 extern void     fb_env_close(T fb_env);
 
 /**
@@ -28,13 +31,14 @@ extern int      fb_env_bpp(T fb_env);
  * if x or y overstep the boundary
  * then throw fb exception
  */
-extern void     fb_env_set_pixel(T fb_env, int x, int y, int color);
-extern int      fb_env_get_pixel(T fb_env, int x, int y);
+extern void     fb_env_set_pixel_32(T fb_env, int x, int y, int color);
+extern int      fb_env_get_pixel_32(T fb_env, int x, int y);
+extern int      fb_env_makecolor_32(T fb_env, byte a, byte r, byte g, byte b);
 
 /**
  * get & set pixels of whole screen
  * user should ensure the bbp and 
- * the length of the buffer thenself
+ * the length of the buffer themself
  */
 extern void    *fb_env_load_pixels(T fb_env);
 extern void     fb_env_update_pixels(T fb_env, void *pixels);
